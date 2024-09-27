@@ -29,7 +29,7 @@ namespace PocketProseApi.Controllers
         {
             var author = await _context.Authors.FindAsync(id);
 
-            if ( author == null)
+            if (author == null)
             {
                 return NotFound("Author not found.");
             }
@@ -45,6 +45,22 @@ namespace PocketProseApi.Controllers
                 LastName = author.LastName
             };
             _context.Authors.Add(newAuthor);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateAuthor(AuthorDto author)
+        {
+            var dbAuthor = await _context.Authors.FindAsync(author.Id);
+
+            if (author == null)
+            {
+                return NotFound("Author not found.");
+            }
+            dbAuthor.FirstName = author.FirstName;
+            dbAuthor.LastName = author.LastName;
+
             await _context.SaveChangesAsync();
             return Ok();
         }
