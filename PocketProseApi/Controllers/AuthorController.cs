@@ -54,13 +54,27 @@ namespace PocketProseApi.Controllers
         {
             var dbAuthor = await _context.Authors.FindAsync(author.Id);
 
-            if (author == null)
+            if (dbAuthor == null)
             {
                 return NotFound("Author not found.");
             }
             dbAuthor.FirstName = author.FirstName;
             dbAuthor.LastName = author.LastName;
 
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteAuthor(int id)
+        {
+            var dbAuthor = await _context.Authors.FindAsync(id);
+
+            if (dbAuthor == null)
+            {
+                return NotFound("Author not found.");
+            }
+            _context.Authors.Remove(dbAuthor);
             await _context.SaveChangesAsync();
             return Ok();
         }
