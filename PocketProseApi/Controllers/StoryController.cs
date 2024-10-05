@@ -40,12 +40,19 @@ namespace PocketProseApi.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateStory(StoryDto story)
         {
+            var author = await _context.Authors.FindAsync(story.AuthorId);
+            if (author == null)
+            {
+                return NotFound("Author not found.");
+            }
+
             var newStory = new Story
             {
                 Title = story.Title,
                 Content = story.Content,
-                Author = await _context.Authors.FindAsync(story.Author.Id),
-                Genre = story.Genre
+                Author = author,
+                Genre = story.Genre,
+                CreatedDate = DateTime.Now
             };
             _context.Stories.Add(newStory);
             await _context.SaveChangesAsync();

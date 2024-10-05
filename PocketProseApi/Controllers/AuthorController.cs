@@ -42,7 +42,9 @@ namespace PocketProseApi.Controllers
             var newAuthor = new Author
             {
                 FirstName = author.FirstName,
-                LastName = author.LastName
+                LastName = author.LastName,
+                CreatedDate = DateTime.Now
+
             };
             _context.Authors.Add(newAuthor);
             await _context.SaveChangesAsync();
@@ -60,6 +62,7 @@ namespace PocketProseApi.Controllers
             }
             dbAuthor.FirstName = author.FirstName;
             dbAuthor.LastName = author.LastName;
+            dbAuthor.UpdatedDate = DateTime.Now;
 
             await _context.SaveChangesAsync();
             return Ok();

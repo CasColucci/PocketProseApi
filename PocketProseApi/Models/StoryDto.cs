@@ -8,7 +8,7 @@
 
         public string Content { get; set; }
 
-        public Author Author { get; set; }
+        public int AuthorId { get; set; }
 
         public Genre Genre { get; set; }
     }
