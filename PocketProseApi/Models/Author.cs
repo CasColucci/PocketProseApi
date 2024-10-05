@@ -9,5 +9,9 @@
         public required string LastName { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
     }
 }

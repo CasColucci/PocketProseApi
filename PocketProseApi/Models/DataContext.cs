@@ -10,5 +10,7 @@ namespace PocketProseApi.Models
         }
 
         public DbSet<Author> Authors { get; set; }
+
+        public DbSet<Story> Stories { get; set; }
     }
 }
